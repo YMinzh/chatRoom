@@ -1,27 +1,7 @@
-/*
-var flag = true;
-
-    
-    process.stdin.on('data',(input)=>{
-        var name;
-        input=input.toString();
-        console.log(input);
-        var socket = require('socket.io-client')('http://localhost:3000');
-        
-        if(flag){
-            name = input;
-            socket.emit("name",input+"进入房间");
-            flag ==false;
-        }else{
-          socket.emit("measure",name+":"+input);
-        }
-        console.log(flag);
-        
-    });
-    */
 var readline = require('readline');
-var socket = require('socket.io-client')('http://localhost:3000');
 
+//建立socket链接
+var socket = require('socket.io-client')('http://localhost:3000');
 var name;
 var count = 0;
 var rl = readline.createInterface({
@@ -29,7 +9,8 @@ var rl = readline.createInterface({
     output:process.stdout
 });
 console.log("请输入用户名");
-
+//键盘录入
+//首次录入为用户名,后面为消息
 rl.on('line',function(answer){
     if(count==0){
         name = answer;
@@ -60,7 +41,7 @@ rl.on('line',function(answer){
 
     }
 });
-
+//监听服务器广播的消息
 socket.on("text",function(obj){
     if(count==0){
 
