@@ -29,6 +29,17 @@ io.on("connection",function(socket){
             io.sockets.connected[namearr[obj.to]].emit("text",obj.name+":"+obj.msg);
         }
     });
+    socket.on("disconnect",function(){
+        var theId;
+        for(var i in namearr){
+            if(namearr[i]==socket.id){
+                theId = i;
+            }
+        }
+        io.sockets.emit("text",theId+"退出聊天室");
+        delete namearr[theId];
+    });
+
 });
 
 /*

@@ -28,6 +28,8 @@ var rl = readline.createInterface({
     input:process.stdin,
     output:process.stdout
 });
+console.log("请输入用户名");
+
 rl.on('line',function(answer){
     if(count==0){
         name = answer;
